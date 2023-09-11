@@ -6,16 +6,27 @@
 #include <stdlib.h>
 //Clay Truelove
 //11695253
+
+
+
 int i = 0;
 int k = 0;
 int j = 0;
 int c = 0;
+
+
 #define max 50
+
+
+
+
 int loops;
 int tick_count = 0;
 int tb[max];
 int add = 0;
 int use = 1;
+
+
 sem_t empty;
 sem_t fill;
 sem_t mutex;
