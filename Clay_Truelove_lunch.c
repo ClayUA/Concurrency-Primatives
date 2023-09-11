@@ -33,6 +33,8 @@ sem_t mutex;
 sem_t skempty;
 sem_t trill;
 
+// create struct for each customer
+
 typedef struct lunch{
     long long int TID;
     int Ticket_Num;
@@ -55,10 +57,11 @@ void lunch_init(struct lunch *lunch){
 
 int lunch_get_ticket(struct lunch *lunch){
     
-    
+    //use semaphores so threads do not run at the same time
+
     sem_wait(&empty);
-    
     sem_wait(&mutex);
+    
     long long int hello = pthread_self();
     lunch->TID = hello;
     printf("\n%llu enters lunch_get_ticket\n",hello);
@@ -141,6 +144,10 @@ int main(int argc, char *argv[]){
     sem_init(&empty,0,total); //wait decrements
     sem_init(&fill,0,0);    //post increases
     sem_init(&mutex,0,1);
+   
+   
+    //create threads fro customers and servers
+
     for(i = 0; i < total; i++){
         pthread_create(&consumer[i], NULL ,customer, buffer + iterable);
         iterable++;
